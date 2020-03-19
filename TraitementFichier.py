@@ -46,21 +46,12 @@ class TraitementFichier():
             dictioASCII[i] = dictio[i]
         return dictioASCII
     
+    
     def triDictioParFreqPuisASCII(self,dictio):
         return sorted(dictio.items(), key=lambda x: (x[1],x[0]))
     
     
-traitFic = TraitementFichier()
-alphaEtFreq = traitFic.getAlphabetEtFreq('donnees/alice.txt')
-print("L'alphabet de ce texte est : ")
-print(alphaEtFreq[0])
-print("La frequence de ce texte est : ")
-print(alphaEtFreq[1])
-print("-------")
-dictio = traitFic.dictioAlphabetFreq(alphaEtFreq[0],alphaEtFreq[1])
 
-print("Voici l'alphabet trié par freq puis par ascii : ")
-print(traitFic.triDictioParFreqPuisASCII(dictio))
 
     
     
