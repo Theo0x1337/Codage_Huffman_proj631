@@ -71,17 +71,17 @@ class arbreHuffman:
         retourne le dictionnaire composé des étiquettes des feuilles et de leur code binaire ici appelé chemin
         """
         if self.getFd() is None and self.getFg() is None:
-            res[self.etiquette]=chemin
-        if not self.getFg is None:
+            res[self.label]=chemin
+        if not self.getFg() is None:
             if chemin is None:
-                self.getFg.parcourir('0')
+                self.getFg().parcourir('0')
             else:
-                self.getFg.parcourir(chemin + '0')            
-        if not self.getFd is None:        
+                self.getFg().parcourir(chemin + '0')            
+        if not self.getFd() is None:        
             if chemin is None:
-                self.getFd.parcourir('1')
+                self.getFd().parcourir('1')
             else:
-                self.getFd.parcourir(chemin + '1')            
+                self.getFd().parcourir(chemin + '1')            
         
         return res
 
