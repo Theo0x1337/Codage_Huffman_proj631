@@ -52,7 +52,7 @@ class TraitementFichier():
     
     
     def ecrireFreqDansFichier(self,lettre,freq,nomFic):
-        with open(nomFic[:-3]+'_Freq.txt','a') as f:
+        with open(nomFic[:-4]+'_Freq.txt','a') as f:
             if(freq != None):
                 f.write(lettre+' '+str(freq)+'\n')
             else:

@@ -64,25 +64,22 @@ class main:
     listeBin8 = convBin.get8pack(listeBin)
 
             
-    convBin.ecrireBinaireFichier(nomFic[:-3]+'bin',listeBin8)
+    convBin.ecrireBinaireFichier(nomFic[:-4]+'_comp.bin',listeBin8)
     
-    size_final=(os.path.getsize(nomFic[:-3]+'bin'))
-    size_initial=(os.path.getsize(nomFic))
+    tailleDepart = (os.path.getsize(nomFic[:-4]+'_comp.bin'))
+    tailleArrivee = (os.path.getsize(nomFic))
 
     #calcul du taux de compression :
-    taux_de_compression=1-(size_final/size_initial)
+    taux_de_compression=1-(tailleArrivee/tailleDepart)
 
-    #affichage : 
-    print("Le taux de compression pour "+ nomFic+" est de "+str(round(taux_de_compression,2)*100)+"%")
+    print("\n Le taux de compression pour "+ nomFic+" est de "+str(round(taux_de_compression,2)*100)+"%")
 
 
-    #definition variable :
-    total = 0 
-
-    #calcul de la moyene de bits d'un caractère :
+    charTot = 0 
+    
+    #pour chaque char de l'alphabet on multiplie le nombre de bits sur lequel il est codé par le nombre de fois qu'il apparait
     for i in range(0,len(listeAlphabet)):
-        total = total + len(tableBin[listeAlphabet[i]])*listeFreq[i]
-    nb_moy_bits=round(total/sum(listeFreq),2)
+        charTot = charTot + len(tableBin[listeAlphabet[i]])*listeFreq[i]
+    nb_moy_bits=round(charTot/sum(listeFreq),2)
 
-    #affichage : 
-    print("Le nombre moyen de bits pour un caractère du fichier"+ nomFic +" est de "+str(nb_moy_bits))
+    print("\n Le nombre moyen de bits pour un caractère du fichier "+ nomFic +" est de "+str(nb_moy_bits))
