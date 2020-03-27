@@ -20,6 +20,8 @@ class main:
     listeFreq = alphaEtFreq[1]
     listeAlphabet = alphaEtFreq[0]
     
+    alpha = listeAlphabet
+    
     dictioAlphaFreq = traitFic.dictioAlphabetFreq(listeFreq,listeAlphabet)
     dictioFreqPuisASCII = traitFic.triDictioParFreqPuisASCII(dictioAlphaFreq)
     
@@ -52,6 +54,8 @@ class main:
     tableBin = racine.parcourir()
     
     convBin = ConvertisseurBinaire()
+    
+    convBin.ecrireValBinaire(alpha,tableBin,nomFic)
     
     contenu = traitFic.getContenuFichier(nomFic)
     

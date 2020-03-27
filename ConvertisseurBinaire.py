@@ -34,4 +34,9 @@ class ConvertisseurBinaire:
         f.close()
         
         
-                    
+    
+    def ecrireValBinaire(self,alphabet,tableBinaire,nomFic):
+        with open(nomFic[:-4]+'_valCharBin.txt','a') as f:
+            for i in alphabet:
+                f.write(i+" : "+str(tableBinaire[i])+'\n')
+            f.close()
