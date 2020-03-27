@@ -86,27 +86,7 @@ class arbreHuffman:
         return res
 
 
-traitFic = TraitementFichier()
-alphaEtFreq = traitFic.getAlphabetEtFreq('donnees/alice.txt')
 
-listeFreq = alphaEtFreq[1]
-listeAlphabet = alphaEtFreq[0]
-
-liste_arbre=[]
-for i in range(0,len(listeFreq)):
-    liste_arbre.append(arbreHuffman(listeFreq[i],listeAlphabet[i]))
-    
-while(len(liste_arbre)>1):
-    min1=min(liste_arbre)
-    liste_arbre.remove(min1)
-    min2=min(liste_arbre)
-    liste_arbre.remove(min2)
-    liste_arbre.append(arbreHuffman(min1.freq+min2.freq,"",min1,min2))
-
-#Quand notre arbre est fini la racine est le premier (et unique) élément de notre liste d'arbre
-racine = liste_arbre[0]
-print(racine)
-    
     
     
     

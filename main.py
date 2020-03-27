@@ -12,11 +12,28 @@ from ConvertisseurBinaire import ConvertisseurBinaire
 
 class main:
     
+    
+    nomFic = input('Entrez le chemin du fichier texte que vous voulez compresser : ')
     traitFic = TraitementFichier()
-    alphaEtFreq = traitFic.getAlphabetEtFreq('donnees/alice.txt')
+    alphaEtFreq = traitFic.getAlphabetEtFreq(nomFic)
     
     listeFreq = alphaEtFreq[1]
     listeAlphabet = alphaEtFreq[0]
+    
+    dictioAlphaFreq = traitFic.dictioAlphabetFreq(listeFreq,listeAlphabet)
+    dictioFreqPuisASCII = traitFic.triDictioParFreqPuisASCII(dictioAlphaFreq)
+    
+    
+    tailleAlphabet = len(listeAlphabet)
+    
+    listeFreq = []
+    listeAlphabet = []
+    
+    traitFic.ecrireFreqDansFichier("Taille de l'alphabet : "+ str(tailleAlphabet),None,nomFic);
+    for couple in dictioFreqPuisASCII:
+        traitFic.ecrireFreqDansFichier(couple[0],couple[1],nomFic)
+        listeFreq.append(couple[1])
+        listeAlphabet.append(couple[0])
     
     liste_arbre=[]
     for i in range(0,len(listeFreq)):
@@ -36,26 +53,27 @@ class main:
     
     convBin = ConvertisseurBinaire()
     
-    contenu = traitFic.getContenuFichier('donnees/extraitalice.txt')
+    contenu = traitFic.getContenuFichier(nomFic)
     
     
     listeBin = convBin.convertEnBinaire(contenu,tableBin)
     
-    convBin.addBitManquant(listeBin)
     
+    convBin.addBitManquant(listeBin)
+        
     listeBin8 = convBin.get8pack(listeBin)
 
             
-    convBin.ecrireBinaireFichier('donnees/extraitalice.bin',listeBin8)
+    convBin.ecrireBinaireFichier(nomFic[:-3]+'bin',listeBin8)
     
-    size_final=(os.path.getsize("donnees/extraitalice.bin"))
-    size_initial=(os.path.getsize('donnees/extraitalice.txt'))
+    size_final=(os.path.getsize(nomFic[:-3]+'bin'))
+    size_initial=(os.path.getsize(nomFic))
 
     #calcul du taux de compression :
     taux_de_compression=1-(size_final/size_initial)
 
     #affichage : 
-    print("Le taux de compression pour extraitalice.txt est de :"+str(taux_de_compression))
+    print("Le taux de compression pour "+ nomFic+" est de "+str(round(taux_de_compression,2)*100)+"%")
 
 
     #definition variable :
@@ -64,7 +82,7 @@ class main:
     #calcul de la moyene de bits d'un caractère :
     for i in range(0,len(listeAlphabet)):
         total = total + len(tableBin[listeAlphabet[i]])*listeFreq[i]
-    nb_moy_bits=total/sum(listeFreq)
+    nb_moy_bits=round(total/sum(listeFreq),2)
 
     #affichage : 
-    print("Le nombre moyen de bits pour un caractère pour extraitAlice est de : "+str(nb_moy_bits))
+    print("Le nombre moyen de bits pour un caractère du fichier"+ nomFic +" est de "+str(nb_moy_bits))

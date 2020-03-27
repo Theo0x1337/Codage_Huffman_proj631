@@ -31,7 +31,7 @@ class TraitementFichier():
     def dictioAlphabetFreq(self,alphabet,freq):
         dictio = dict()
         for i in range(0,len(alphabet)):
-            dictio[alphabet[i]] = freq[i]
+            dictio[freq[i]] = alphabet[i]
         return dictio
     
     
@@ -51,7 +51,14 @@ class TraitementFichier():
         return sorted(dictio.items(), key=lambda x: (x[1],x[0]))
     
     
-
+    def ecrireFreqDansFichier(self,lettre,freq,nomFic):
+        with open(nomFic[:-3]+'_Freq.txt','a') as f:
+            if(freq != None):
+                f.write(lettre+' '+str(freq)+'\n')
+            else:
+                f.write(lettre+'\n')
+        f.close()
+            
 
     
     
