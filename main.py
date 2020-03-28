@@ -12,10 +12,15 @@ from ConvertisseurBinaire import ConvertisseurBinaire
 
 class main:
     
-    
-    nomFic = input('Entrez le chemin du fichier texte que vous voulez compresser : ')
     traitFic = TraitementFichier()
-    alphaEtFreq = traitFic.getAlphabetEtFreq(nomFic)
+    
+    try:
+        nomFic = input('Entrez le chemin du fichier texte que vous voulez compresser : \n')
+        alphaEtFreq = traitFic.getAlphabetEtFreq(nomFic)
+    except FileNotFoundError:
+        print("")
+        nomFic = input('Erreur le fichier saisi n existe pas ou vous vous êtes trompé dans la saisie, recommencez svp : \n')
+        alphaEtFreq = traitFic.getAlphabetEtFreq(nomFic)
     
     listeFreq = alphaEtFreq[1]
     listeAlphabet = alphaEtFreq[0]
@@ -48,11 +53,13 @@ class main:
         liste_arbre.remove(min2)
         liste_arbre.append(arbreHuffman(min1.freq+min2.freq,"",min1,min2))
     
+    
     #Quand notre arbre est fini la racine est le premier (et unique) élément de notre liste d'arbre
     racine = liste_arbre[0]
     
-    tableBin = racine.parcourir()
     
+    tableBin = racine.parcourir()
+        
     convBin = ConvertisseurBinaire()
     
     convBin.ecrireValBinaire(alpha,tableBin,nomFic)
@@ -64,7 +71,7 @@ class main:
     
     
     convBin.addBitManquant(listeBin)
-        
+            
     listeBin8 = convBin.get8pack(listeBin)
 
             
@@ -74,7 +81,7 @@ class main:
     tailleArrivee = (os.path.getsize(nomFic))
 
     #calcul du taux de compression :
-    taux_de_compression=1-(tailleArrivee/tailleDepart)
+    taux_de_compression=1-(tailleDepart/tailleArrivee)
 
     print("\n Le taux de compression pour "+ nomFic+" est de "+str(round(taux_de_compression,2)*100)+"%")
 
