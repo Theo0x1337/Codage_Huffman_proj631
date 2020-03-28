@@ -6,8 +6,6 @@ Created on Thu Mar 19 09:40:41 2020
 @author: bernardintheo
 """
 
-from TraitementFichier import TraitementFichier
-
 class arbreHuffman:
     
     def __init__(self,freq,label,fg=None,fd=None):
@@ -21,7 +19,7 @@ class arbreHuffman:
     redefinition de l'affichage 
     """
     def __str__(self):
-        return "label"+self.label+"frequence : " + str(self.freq) + " gauche : " + str(self.fg.freq) + " droit : " + str(self.fd.freq)
+        return "label"+self.label+" frequence : " + str(self.freq) + " gauche : " + str(self.fg.freq) + " droit : " + str(self.fd.freq)
     
     
     
@@ -85,7 +83,7 @@ class arbreHuffman:
         
         return res
 
-
+    
 
     
     
